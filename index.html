@@ -361,6 +361,44 @@
     .lang-switcher { top: 12px; right: 12px; }
     .lang-btn { padding: 7px 12px; font-size: 11px; }
   }
+
+  /* ── STATIC LANDSCAPE SCREEN: everything fits, no scroll ── */
+  @media (min-width: 700px) and (min-aspect-ratio: 1/1) {
+    html, body { height: 100%; overflow: hidden; }
+    .compare {
+      height: 100vh; min-height: 0;
+      padding: clamp(50px, 6.5vh, 68px) clamp(16px, 3vw, 40px) clamp(10px, 2vh, 24px);
+      justify-content: flex-start;
+    }
+    .compare__card {
+      flex: 1 1 auto; min-height: 0;
+      display: flex; flex-direction: column;
+      max-width: 1240px; padding: 4px;
+    }
+    .compare__scroll { flex: 1 1 auto; min-height: 0; overflow: hidden; display: flex; }
+    .compare-table { height: 100%; min-width: 0; }
+    .compare-table th, .compare-table td { padding: clamp(2px, 0.7vh, 12px) clamp(10px, 1.4vw, 22px); }
+    .compare-table thead th { padding-top: clamp(8px, 1.8vh, 24px); padding-bottom: clamp(6px, 1.4vh, 20px); }
+    .compare-table__label { font-size: clamp(9px, 1.5vh, 14px); line-height: 1.25; }
+    .compare-table__label .sub { font-size: clamp(7.5px, 1.1vh, 11px); margin-top: 2px; line-height: 1.25; }
+    .val { font-size: clamp(9px, 1.55vh, 14px); line-height: 1.25; }
+    .plan__eyebrow { font-size: clamp(7.5px, 1.05vh, 10px); }
+    .plan__name { font-size: clamp(20px, min(4.2vh, 3vw), 38px); margin-top: 2px; }
+    .plan__desc { font-size: clamp(8.5px, 1.3vh, 12.5px); }
+    .check, .dash { width: clamp(16px, 2.2vh, 22px); height: clamp(16px, 2.2vh, 22px); font-size: clamp(10px, 1.5vh, 13px); }
+    .lang-switcher { top: 10px; right: clamp(12px, 2vw, 24px); }
+    .lang-btn { padding: 6px 14px; }
+  }
+
+  /* ── LABEL COLUMN: distinct tone, like a real comparison chart ── */
+  .compare-table thead th.compare-table__label,
+  .compare-table tbody td.compare-table__label {
+    background: rgba(255,255,255,0.07);
+    border-right: 1px solid rgba(255,255,255,0.10);
+  }
+  .compare-table thead th.compare-table__label { border-bottom: 1px solid var(--border); border-top-left-radius: 6px; }
+  .compare-table tbody tr:last-child td.compare-table__label { border-bottom-left-radius: 6px; }
+  .compare-table tbody td.compare-table__label { color: var(--white); }
 </style>
 </head>
 <body>
@@ -375,22 +413,12 @@
   <div class="compare__photobg"></div>
   <div class="compare__duotone"></div>
 
-  <div class="compare__intro">
-    <h2 data-i="h2">Legacy Seat vs. other contract options</h2>
-    <p data-i="intro">Compare the exclusive Legacy Seat benefits against any other contract option.</p>
-  </div>
-
   <div class="compare__card">
     <div class="compare__scroll">
       <table class="compare-table">
         <thead>
           <tr>
-            <th class="compare-table__label">
-              <div class="plan">
-                <span class="plan__eyebrow" style="visibility:hidden">Access Fee</span>
-                <span class="plan__name detail-title" data-i="details">CONTRACT DETAILS</span>
-              </div>
-            </th>
+            <th class="compare-table__label"></th>
             <th class="compare-table__plan--featured">
               <div class="plan">
                 <span class="plan__eyebrow" data-i="eyebrow">Access Fee</span>
@@ -416,7 +444,7 @@
           <tr>
             <td class="compare-table__label"><span data-i="payment">Payment method</span></td>
             <td class="val featured" data-i="pay_l">1 payment</td>
-            <td class="val" data-i="pay_o">1 and 4 payments for 15Y</td>
+            <td class="val" data-i="pay_o">1 and 4 payments</td>
           </tr>
           <tr>
             <td class="compare-table__label"><span data-i="price">Access Fee price</span><span class="sub" data-i="price_s">Depending on product and location</span></td>
@@ -475,7 +503,7 @@
 </section>
 
 <script>
-  var T = {"h2": {"en": "Legacy Seat vs. other contract options", "es": "Legacy Seat vs. otras opciones de contrato", "ca": "Legacy Seat vs. altres opcions de contracte"}, "intro": {"en": "Compare the exclusive Legacy Seat benefits against any other contract option.", "es": "Compara los beneficios exclusivos del Legacy Seat frente a cualquier otra opción de contrato.", "ca": "Compara els beneficis exclusius del Legacy Seat amb qualsevol altra opció de contracte."}, "eyebrow": {"en": "Access Fee", "es": "Canon de Acceso", "ca": "Cànon d'Accés"}, "details": {"en": "CONTRACT DETAILS", "es": "DETALLES DE CONTRATO", "ca": "DETALLS DEL CONTRACTE"}, "plan30": {"en": "LEGACY SEAT", "es": "LEGACY SEAT", "ca": "LEGACY SEAT"}, "single": {"en": "Single payment", "es": "Pago único", "ca": "Pagament únic"}, "other": {"en": "OTHER CONTRACT OPTIONS", "es": "OTRAS OPCIONES DE CONTRATO", "ca": "ALTRES OPCIONS DE CONTRACTE"}, "other_desc": {"en": "Single payment or financed", "es": "Pago único o financiado", "ca": "Pagament únic o finançat"}, "duration": {"en": "Contract duration", "es": "Duración del contrato", "ca": "Durada del contracte"}, "v30": {"en": "30 years", "es": "30 años", "ca": "30 anys"}, "v1530": {"en": "15 years", "es": "15 años", "ca": "15 anys"}, "payment": {"en": "Payment method", "es": "Método de pago", "ca": "Mètode de pagament"}, "pay_l": {"en": "1 payment", "es": "1 pago", "ca": "1 pagament"}, "pay_o": {"en": "1 and 4 payments for 15Y", "es": "1 y 4 pagos a 15 años", "ca": "1 i 4 pagaments a 15 anys"}, "price": {"en": "Access Fee price", "es": "Precio del Canon de Acceso", "ca": "Preu del Cànon d'Accés"}, "price_s": {"en": "Depending on product and location", "es": "Según producto y ubicación", "ca": "Segons producte i ubicació"}, "price_l": {"en": "15-year price × 1.5", "es": "Precio a 15 años × 1,5", "ca": "Preu a 15 anys × 1,5"}, "price_o": {"en": "Product base price", "es": "Precio base del producto", "ca": "Preu base del producte"}, "seat": {"en": "Seat access every season", "es": "Acceso al asiento cada temporada", "ca": "Accés a la butaca cada temporada"}, "exit": {"en": "Exit / sale to a third party", "es": "Salida / venta a un tercero", "ca": "Sortida / venda a un tercer"}, "bc": {"en": "Business Club access", "es": "Acceso al Business Club", "ca": "Accés al Business Club"}, "bc_l": {"en": "ELITE MEMBERS<br>(All inclusive)", "es": "ELITE MEMBERS<br>(Todo incluido)", "ca": "ELITE MEMBERS<br>(Tot inclòs)"}, "bc_o": {"en": "CORE MEMBERS<br>(App + 1 event per year)", "es": "CORE MEMBERS<br>(App + 1 evento por año)", "ca": "CORE MEMBERS<br>(App + 1 esdeveniment per any)"}, "pap": {"en": "PAP resale", "es": "Reventa PAP", "ca": "Revenda PAP"}, "pap_s": {"en": "% of the profit when the Club resells your seat match by match", "es": "% del beneficio cuando el Club revende tu asiento partido a partido", "ca": "% del benefici quan el Club revèn la teva butaca partit a partit"}, "fee": {"en": "Annual seat fee", "es": "Cuota anual de asiento", "ca": "Quota anual de la butaca"}, "fee_l": {"en": "Season RRP with a fixed 2% annual increase for the first 5 years", "es": "PVP de temporada con incremento fijo del 2% anual los 5 primeros años", "ca": "PVP de temporada amb un increment fix del 2% anual els primers 5 anys"}, "fee_o": {"en": "Season RRP", "es": "PVP de temporada", "ca": "PVP de temporada"}, "pause": {"en": "Pause a season", "es": "Pausar una temporada", "ca": "Pausar una temporada"}, "pause_s": {"en": "Without paying that season's fee", "es": "Sin abonar la cuota de esa temporada", "ca": "Sense abonar la quota d'aquella temporada"}, "card": {"en": "Exclusive personalised physical card", "es": "Carnet físico exclusivo personalizado", "ca": "Carnet físic exclusiu personalitzat"}, "card_s": {"en": "With your company name, includes official FC Barcelona wallet", "es": "Con el nombre de tu empresa, incluye cartera oficial del FC Barcelona", "ca": "Amb el nom de la teva empresa, inclou cartera oficial del FC Barcelona"}, "prio": {"en": "Priority ticket purchase", "es": "Prioridad en la compra de entradas", "ca": "Prioritat en la compra d'entrades"}, "prio_s": {"en": "Away games and finals", "es": "Desplazamientos y finales", "ca": "Desplaçaments i finals"}, "act": {"en": "One activity per season", "es": "Una actividad por temporada", "ca": "Una activitat per temporada"}, "act_s": {"en": "Max. 2 people per account. E.g. Star Pass, Warm Up, Heart of the Pitch or Coach Pass", "es": "Máx. 2 personas por cuenta. Ej. Star Pass, Warm Up, Heart of the Pitch o Coach Pass", "ca": "Màx. 2 persones per compte. Ex. Star Pass, Warm Up, Heart of the Pitch o Coach Pass"}};
+  var T = {"h2": {"en": "Legacy Seat vs. other contract options", "es": "Legacy Seat vs. otras opciones de contrato", "ca": "Legacy Seat vs. altres opcions de contracte"}, "intro": {"en": "Compare the exclusive Legacy Seat benefits against any other contract option.", "es": "Compara los beneficios exclusivos del Legacy Seat frente a cualquier otra opción de contrato.", "ca": "Compara els beneficis exclusius del Legacy Seat amb qualsevol altra opció de contracte."}, "eyebrow": {"en": "Access Fee", "es": "Canon de Acceso", "ca": "Cànon d'Accés"}, "details": {"en": "CONTRACT DETAILS", "es": "DETALLES DE CONTRATO", "ca": "DETALLS DEL CONTRACTE"}, "plan30": {"en": "LEGACY SEAT", "es": "LEGACY SEAT", "ca": "LEGACY SEAT"}, "single": {"en": "Single payment", "es": "Pago único", "ca": "Pagament únic"}, "other": {"en": "OTHER CONTRACT OPTIONS", "es": "OTRAS OPCIONES DE CONTRATO", "ca": "ALTRES OPCIONS DE CONTRACTE"}, "other_desc": {"en": "Single payment or financed", "es": "Pago único o financiado", "ca": "Pagament únic o finançat"}, "duration": {"en": "Contract duration", "es": "Duración del contrato", "ca": "Durada del contracte"}, "v30": {"en": "30 years", "es": "30 años", "ca": "30 anys"}, "v1530": {"en": "15 years", "es": "15 años", "ca": "15 anys"}, "payment": {"en": "Payment method", "es": "Método de pago", "ca": "Mètode de pagament"}, "pay_l": {"en": "1 payment", "es": "1 pago", "ca": "1 pagament"}, "pay_o": {"en": "1 and 4 payments", "es": "1 y 4 pagos", "ca": "1 i 4 pagaments"}, "price": {"en": "Access Fee price", "es": "Precio del Canon de Acceso", "ca": "Preu del Cànon d'Accés"}, "price_s": {"en": "Depending on product and location", "es": "Según producto y ubicación", "ca": "Segons producte i ubicació"}, "price_l": {"en": "15-year price × 1.5", "es": "Precio a 15 años × 1,5", "ca": "Preu a 15 anys × 1,5"}, "price_o": {"en": "Product base price", "es": "Precio base del producto", "ca": "Preu base del producte"}, "seat": {"en": "Seat access every season", "es": "Acceso al asiento cada temporada", "ca": "Accés a la butaca cada temporada"}, "exit": {"en": "Exit / sale to a third party", "es": "Salida / venta a un tercero", "ca": "Sortida / venda a un tercer"}, "bc": {"en": "Business Club access", "es": "Acceso al Business Club", "ca": "Accés al Business Club"}, "bc_l": {"en": "ELITE MEMBERS<br>(All inclusive)", "es": "ELITE MEMBERS<br>(Todo incluido)", "ca": "ELITE MEMBERS<br>(Tot inclòs)"}, "bc_o": {"en": "CORE MEMBERS<br>(App + 1 event per year)", "es": "CORE MEMBERS<br>(App + 1 evento por año)", "ca": "CORE MEMBERS<br>(App + 1 esdeveniment per any)"}, "pap": {"en": "PAP resale", "es": "Reventa PAP", "ca": "Revenda PAP"}, "pap_s": {"en": "% of the profit when the Club resells your seat match by match", "es": "% del beneficio cuando el Club revende tu asiento partido a partido", "ca": "% del benefici quan el Club revèn la teva butaca partit a partit"}, "fee": {"en": "Annual seat fee", "es": "Cuota anual de asiento", "ca": "Quota anual de la butaca"}, "fee_l": {"en": "Season RRP with a fixed 2% annual increase for the first 5 years", "es": "PVP de temporada con incremento fijo del 2% anual los 5 primeros años", "ca": "PVP de temporada amb un increment fix del 2% anual els primers 5 anys"}, "fee_o": {"en": "Season RRP", "es": "PVP de temporada", "ca": "PVP de temporada"}, "pause": {"en": "Pause a season", "es": "Pausar una temporada", "ca": "Pausar una temporada"}, "pause_s": {"en": "Without paying that season's fee", "es": "Sin abonar la cuota de esa temporada", "ca": "Sense abonar la quota d'aquella temporada"}, "card": {"en": "Exclusive personalised physical card", "es": "Carnet físico exclusivo personalizado", "ca": "Carnet físic exclusiu personalitzat"}, "card_s": {"en": "With your company name, includes official FC Barcelona wallet", "es": "Con el nombre de tu empresa, incluye cartera oficial del FC Barcelona", "ca": "Amb el nom de la teva empresa, inclou cartera oficial del FC Barcelona"}, "prio": {"en": "Priority ticket purchase", "es": "Prioridad en la compra de entradas", "ca": "Prioritat en la compra d'entrades"}, "prio_s": {"en": "Away games and finals", "es": "Desplazamientos y finales", "ca": "Desplaçaments i finals"}, "act": {"en": "One activity per season", "es": "Una actividad por temporada", "ca": "Una activitat per temporada"}, "act_s": {"en": "Max. 2 people per account. E.g. Star Pass, Warm Up, Heart of the Pitch or Coach Pass", "es": "Máx. 2 personas por cuenta. Ej. Star Pass, Warm Up, Heart of the Pitch o Coach Pass", "ca": "Màx. 2 persones per compte. Ex. Star Pass, Warm Up, Heart of the Pitch o Coach Pass"}};
   var TITLES = {"en": "Legacy Seat vs. other contract options · Spotify Camp Nou", "es": "Legacy Seat vs. otras opciones de contrato · Spotify Camp Nou", "ca": "Legacy Seat vs. altres opcions de contracte · Spotify Camp Nou"};
   function setLang(l) {
     document.querySelectorAll('[data-i]').forEach(function (el) {
